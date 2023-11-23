@@ -6,6 +6,17 @@ const path = require('path');
 
 const projectRoot = path.join('403RecipesApp', '/');
 
+const knex = require("knex")({
+    client:"pg",
+    connection: {
+        host : "localhost",
+        user : "postgres",
+        password : "password123",
+        database : "recipes_web",
+        port : 5432
+    }
+});
+
 var cheapCooks = 'AppContents/';
 
 var stylesheets = '';
