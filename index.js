@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+  }
+
 let express = require('express');
 let app = express();
 const bcrypt = require('bcrypt');
@@ -29,13 +33,12 @@ const knex = require("knex")({
 var cheapCooks = 'AppContents/';
 var stylesheets = '';
 const users = [];
-const sessionSecret = 'your_secret_key_here';
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(session({
-    secret: sessionSecret,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
   }));
