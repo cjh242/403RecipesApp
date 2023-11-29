@@ -11,6 +11,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
 const projectRoot = path.join('403RecipesApp', '/');
+const { Client } = require('pg');
 
 const initializePassport = require('./passport-config');
 initializePassport(
@@ -19,20 +20,29 @@ email => users.find(user => user.email === email),
 id => users.find(user => user.id === id)
 );
 
-const knex = require("knex")({
-    client:"pg",
-    connection: {
-        host : "localhost",
+const client = new Client({
+        host : "recipes-web.cadla0nxksej.us-east-1.rds.amazonaws.com",
         user : "postgres",
-        password : "password123",
-        database : "recipes_web",
-        port : 5432
-    }
+        password : "Elliot24Conway23",
+        database : "recipes-web",
+        port : 5432,
+        ssl: {
+            rejectUnauthorized: false,
+        },
 });
 
 var cheapCooks = 'AppContents/';
 var stylesheets = '';
 const users = [];
+
+client.connect()
+  .then(() => {
+    console.log('Connected to the database');
+    // Your code for executing queries goes here
+  })
+  .catch(err => {
+    console.error('Error connecting to the database', err);
+  });
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
