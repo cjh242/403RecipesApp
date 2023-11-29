@@ -77,8 +77,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
   }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -89,7 +89,7 @@ app.set('views', '/Users/conwayhogan/Desktop/403/403RecipesApp/AppContents/views
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
 app.get("/", checkAuthenticated, (req, res) => { 
-    res.render('index.html')});
+    res.render('index.ejs')});
 
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
@@ -144,9 +144,9 @@ app.post('/logout', (req, res) => {
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-      return next()
+      return next();
     }
-    res.redirect('/login')
+    res.redirect('/login');
 }
   
 function checkNotAuthenticated(req, res, next) {
