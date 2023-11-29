@@ -91,6 +91,9 @@ app.use(express.static(path.join(stylesheets, 'AppContents')));
 app.get("/", checkAuthenticated, (req, res) => { 
     res.render('index.ejs')});
 
+app.get("/new", checkAuthenticated, (req, res) => { 
+    res.render('addRecipe.ejs')});
+
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
 
@@ -138,7 +141,7 @@ app.post('/logout', (req, res) => {
       if (err) {
         return next(err);
       }
-      res.redirect('/login'); // Redirect to the login page or any other desired destination
+      res.redirect('/login'); // Redirect to the login page
     });
   });
 
