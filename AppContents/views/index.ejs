@@ -43,7 +43,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>Poor Chefs</h1>
@@ -52,8 +52,8 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html">My Recipes</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/">My Recipes</a></li>
           <!-- <li class="dropdown"><a href="category.html"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="search-result.html">Search Result</a></li>
@@ -74,7 +74,10 @@
           </li>
 
           <li><a href="about.html">About</a></li> -->
-          <li><a href="contact.html">Log In</a></li>
+          <li><a href="/login">Log In</a></li>
+          <a><form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+          </form></a>
         </ul>
       </nav><!-- .navbar -->
 
@@ -264,12 +267,12 @@
           <div class="col-6 col-lg-2">
             <h3 class="footer-heading">Navigation</h3>
             <ul class="footer-links list-unstyled">
-              <li><a href="index.html"><i class="bi bi-chevron-right"></i> Home</a></li>
-              <li><a href="index.html"><i class="bi bi-chevron-right"></i>My Recipes</a></li>
+              <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
+              <li><a href="/"><i class="bi bi-chevron-right"></i>My Recipes</a></li>
               <!-- <li><a href="category.html"><i class="bi bi-chevron-right"></i> Categories</a></li>
               <li><a href="single-post.html"><i class="bi bi-chevron-right"></i> Single Post</a></li>
               <li><a href="about.html"><i class="bi bi-chevron-right"></i> About us</a></li> -->
-              <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Log In</a></li>
+              <li><a href="/login"><i class="bi bi-chevron-right"></i> Log In</a></li>
             </ul>
           </div>
           <!-- <div class="col-6 col-lg-2">
