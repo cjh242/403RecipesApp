@@ -86,13 +86,13 @@ const User = sequelize.define('User', {
 
   module.exports = Recipe;
 
-  sequelize.sync({ force: true }) // Set force to true to drop and recreate tables (for development)
-  .then(() => {
-    console.log('Database and tables synced!');
-  })
-  .catch((error) => {
-    console.error('Error syncing database:', error);
-  });
+  // sequelize.sync({ force: true }) // Set force to true to drop and recreate tables (for development)
+  // .then(() => {
+  //   console.log('Database and tables synced!');
+  // })
+  // .catch((error) => {
+  //   console.error('Error syncing database:', error);
+  // });
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
