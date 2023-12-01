@@ -96,7 +96,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
-app.set('views', '/Users/Tiffany/Desktop/BYU IS CORE/IS 403/403RecipesApp/AppContents/views')
+app.set('views',  path.join(baseDir, 'AppContents', 'views'));
 
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
