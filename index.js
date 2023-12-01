@@ -45,6 +45,18 @@ const sequelize = new Sequelize('recipes-data', 'postgres', 'Elliot24Conway23', 
       },
   });
 
+  const knex = require("knex")({
+    client: "pg",
+    connection: {
+        host : "recipes-server.cgflce8swton.us-east-1.rds.amazonaws.com",
+        user : "postgres",
+        password : "Elliot24Conway23",
+        database : "recipes-data",
+        port : 5432,
+        ssl: { rejectUnauthorized: false }
+    }
+});
+
 var cheapCooks = 'AppContents/';
 var stylesheets = '';
 //const users = [];
@@ -84,7 +96,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
-app.set('views', '/Users/conwayhogan/Desktop/403/403RecipesApp/AppContents/views')
+app.set('views', '/Users/Tiffany/Desktop/BYU IS CORE/IS 403/403RecipesApp/AppContents/views')
 
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
@@ -93,6 +105,12 @@ app.get("/", checkAuthenticated, (req, res) => {
 
 app.get("/new", checkAuthenticated, (req, res) => { 
     res.render('addRecipe.ejs')});
+
+app.get("/myrecipes", checkAuthenticated, (req, res) => {
+      knex.select().from("recipes").then(recipes => {
+          res.render("myRecipes.ejs", {myrecipes: recipes});
+      });
+  });
 
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
@@ -144,6 +162,16 @@ app.post('/logout', (req, res) => {
       res.redirect('/login'); // Redirect to the login page
     });
   });
+
+app.post("/deleteRecipe/:id", (req, res) => {
+    knex("recipes").where("recipe_id", req.params.id).del().then(myrecipes => {
+        res.redirect("/myrecipes");
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({err});
+    })
+});
+
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
