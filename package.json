@@ -4,7 +4,8 @@
   "description": "social media web app for sharing recipes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Elliot Pi",
   "license": "ISC",

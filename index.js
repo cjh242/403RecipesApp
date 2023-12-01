@@ -34,6 +34,7 @@ const sequelize = new Sequelize('recipes-data', 'postgres', 'Elliot24Conway23', 
 
 var cheapCooks = 'AppContents/';
 var stylesheets = '';
+const baseDir = __dirname;
 //const users = [];
 
 const User = sequelize.define('User', {
@@ -105,7 +106,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
-app.set('views', '/Users/conwayhogan/Desktop/403/403RecipesApp/AppContents/views')
+app.set('views', path.join(baseDir, 'AppContents', 'views'))
 
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
