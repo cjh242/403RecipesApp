@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 let express = require('express');
 let app = express();
+const port = process.env.PORT || 3000;
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash');
@@ -186,4 +187,4 @@ function checkNotAuthenticated(req, res, next) {
     next()
 }
 
-app.listen(3000, () => console.log("The server is listening for a client."));
+app.listen(port, () => console.log("The server is listening for a client."));
