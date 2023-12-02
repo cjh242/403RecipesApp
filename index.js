@@ -178,7 +178,7 @@ app.post('/new', checkAuthenticated, async (req, res) => {
     res.redirect('/new');
 });
 
-app.post('/myRecipes', checkAuthenticated, async (req, res) => {
+app.post('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 
   const deleteRecipe = await Recipe.destroy({
     where: { id: req.body.id }
