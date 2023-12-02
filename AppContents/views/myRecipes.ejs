@@ -128,19 +128,10 @@
                     <th style="width: 25%;text-align:left">Instructions</th>
                 </tr>
               </thead>
-              <% for (let iCount = 0; iCount < myrecipes.length; iCount++) { %>
-                <tr>
-                    <td><%= myrecipes[iCount].category %></td>
-                    <td><%= myrecipes[iCount].description %></td> 
-                    <td><%= myrecipes[iCount].recipe_title %></td>  
-                    <td><%= myrecipes[iCount].ingredients %></td>  
-                    <td><%= myrecipes[iCount].instructions %></td>     
-                    <td>
-                        <form action="/deleteRecipe/<%= myrecipes[iCount].recipe_id %>" method="POST">
-                            <input type="submit" name="Delete" value="Delete" />
-                        </form>
-                    </td>                        
-                </tr>
+              <ul>
+                <% myrecipes.forEach(function(recipes)) { %>
+                  <li><%= myrecipes.id %></li>
+              </ul>
             <% } %>
             <tbody>
 

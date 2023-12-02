@@ -117,9 +117,10 @@ app.get("/", checkAuthenticated, (req, res) => {
 app.get("/new", checkAuthenticated, (req, res) => { 
     res.render('addRecipe.ejs', { userId: req.user.id })});
 
-app.get("/myrecipes", checkAuthenticated, (req, res) => {
-    res.render("myRecipes.ejs");
-      });
+app.get("/myrecipes", checkAuthenticated, async (req, res) => {
+  const recipes = await Recipe.findAll();
+  res.render('myRecipes.ejs'),  {myrecipes: recipes }});
+
 
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
@@ -176,6 +177,16 @@ app.post('/logout', (req, res) => {
     
     res.redirect('/new');
 });
+
+
+
+// app.post('/myRecipes', checkAuthenticated, async (req, res) => {
+
+//   const deleteRecipe = await Recipe.destroy({
+//     where: { UserID: ??? }
+//   })
+// })
+
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
