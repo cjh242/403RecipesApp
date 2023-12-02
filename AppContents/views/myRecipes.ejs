@@ -121,16 +121,20 @@
             <table>
               <thead>
                 <tr>
-                    <th style="width: 25%;text-align:left">Category</th>
-                    <th style="width: 25%;text-align:left">Description</th>
                     <th style="width: 25%;text-align:left">Recipe Title</th>
+                    <th style="width: 25%;text-align:left">Description</th>
+                    <th style="width: 25%;text-align:left">Category</th>
                     <th style="width: 25%;text-align:left">Ingredients</th>
                     <th style="width: 25%;text-align:left">Instructions</th>
                 </tr>
               </thead>
               <ul>
                 <% myrecipes.forEach(recipe => { %>
-                  <li><%= recipes.id %></li>
+                  <li><%= recipe.title %></li>
+                  <li><%= recipe.description %></li>
+                  <li><%= recipe.category %></li>
+                  <li><%= recipe.ingredients %></li>
+                  <li><%= recipe.instructions %></li>
                 <% }); %>
               </ul>
             <tbody>
