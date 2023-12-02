@@ -121,21 +121,29 @@
             <table>
               <thead>
                 <tr>
-                    <th style="width: 25%;text-align:left">Recipe Title</th>
+                    <th style="width: 20%;text-align:left">Recipe Title</th>
                     <th style="width: 25%;text-align:left">Description</th>
-                    <th style="width: 25%;text-align:left">Category</th>
-                    <th style="width: 25%;text-align:left">Ingredients</th>
+                    <th style="width: 20%;text-align:left">Category</th>
+                    <th style="width: 20%;text-align:left">Ingredients</th>
                     <th style="width: 25%;text-align:left">Instructions</th>
                 </tr>
               </thead>
               <ul>
                 <% myrecipes.forEach(recipe => { %>
-                  <li><%= recipe.title %></li>
-                  <li><%= recipe.description %></li>
-                  <li><%= recipe.category %></li>
-                  <li><%= recipe.ingredients %></li>
-                  <li><%= recipe.instructions %></li>
+                  <tr>
+                  <td><%= recipe.title %></td>
+                  <td><%= recipe.description %></td>
+                  <td><%= recipe.category %></td>
+                  <td><%= recipe.ingredients %></td>
+                  <td><%= recipe.instructions %></td>
+                  
                 <% }); %>
+
+                <form action="/deleteRecipe/ //myrecipes[iCount].recipe_id %>" method="POST">
+                  <input type="submit" name="Delete" value="Delete" />
+                </form>
+
+              </tr>
               </ul>
             <tbody>
 
