@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-  }
+// if (process.env.NODE_ENV !== 'production') {
+//     require('dotenv').config()
+//   }
 
 let express = require('express');
 let app = express();
@@ -99,7 +99,7 @@ app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'secret',
     resave: true,
     saveUninitialized: true
   }));
