@@ -119,7 +119,8 @@ app.get("/new", checkAuthenticated, (req, res) => {
 
 app.get("/myrecipes", checkAuthenticated, async (req, res) => {
   const recipes = await Recipe.findAll();
-  res.render('myRecipes.ejs'),  {myrecipes: recipes }});
+  res.render('myRecipes.ejs',  { myrecipes: recipes });
+});
 
 
 app.get('/register', checkNotAuthenticated, (req, res) => { 
