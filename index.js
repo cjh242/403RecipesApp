@@ -117,6 +117,10 @@ app.get("/", checkAuthenticated, (req, res) => {
 app.get("/new", checkAuthenticated, (req, res) => { 
     res.render('addRecipe.ejs', { userId: req.user.id })});
 
+app.get("/myrecipes", checkAuthenticated, (req, res) => {
+    res.render("myRecipes.ejs");
+      });
+
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
 
