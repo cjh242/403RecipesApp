@@ -136,8 +136,8 @@
                   <td style="text-align:center"><%= recipe.category %></td>
                   <td style="word-wrap: normal"><%= recipe.ingredients %></td>
                   <td style="word-wrap: normal"><%= recipe.instructions %></td>
-                  <td style="width: 25%;text-align:right">
-                  <form action="/deleteRecipe/ //myrecipes[iCount].recipe_id %>" method="POST">
+                  <td style="width: 25%;text-align:center">
+                  <form action="/deleteRecipe/<%= recipe.id %>" method="POST">
                     <input type="submit" name="Delete" value="Delete" />
                   </form>
                   </td>
@@ -153,6 +153,7 @@
             <!-- <div class="text-center"><button type="submit">Delete Recipe</button></div> -->
           </form>
         </div><!-- End Contact Form -->
+        <br>
         <a href="/new" class="button-link">
           <button class="button-style">Add new recipe</button>
         </a>

@@ -170,7 +170,7 @@ app.post('/logout', (req, res) => {
     });
   });
 
-  app.post('/new', checkAuthenticated, async (req, res) => {
+app.post('/new', checkAuthenticated, async (req, res) => {
 
     const newRecipe = await Recipe.create({
         UserId: req.user.id,
@@ -186,14 +186,14 @@ app.post('/logout', (req, res) => {
     res.redirect('/new');
 });
 
+app.post('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 
+  const deleteRecipe = await Recipe.destroy({
+    where: { id: req.params.id }
+  });
 
-// app.post('/myRecipes', checkAuthenticated, async (req, res) => {
-
-//   const deleteRecipe = await Recipe.destroy({
-//     where: { UserID: ??? }
-//   })
-// })
+  res.redirect('/myrecipes');
+});
 
 
 function checkAuthenticated(req, res, next) {
