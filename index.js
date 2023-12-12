@@ -111,7 +111,7 @@ app.set('views', path.join(baseDir, 'AppContents', 'views'))
 
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
-app.get("/", checkAuthenticated, (req, res) => { 
+app.get("/", (req, res) => { 
     res.render('index.ejs')});
 
 app.get("/new", checkAuthenticated, (req, res) => { 
