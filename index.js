@@ -117,16 +117,16 @@ app.get("/", checkAuthenticated, (req, res) => {
 app.get("/new", checkAuthenticated, (req, res) => { 
     res.render('addRecipe.ejs', { userId: req.user.id })});
 
-app.get("/myrecipes", checkAuthenticated, async (req, res) => {
+app.get("/allrecipes", async (req, res) => {
   const recipes = await Recipe.findAll();
-  res.render('myRecipes.ejs',  { myrecipes: recipes });
+  res.render('allRecipes.ejs',  { myrecipes: recipes });
 });
 
-app.get("/myrecipes1", checkAuthenticated, async (req, res) => {
+app.get("/myrecipes", checkAuthenticated, async (req, res) => {
   const UserId = req.user.id;
 
   const recipes = await Recipe.findAll({ where: { userId: UserId } });
-  res.render('myRecipes1.ejs',  { myrecipes: recipes });
+  res.render('myRecipes.ejs',  { myrecipes: recipes });
 });
 
 
