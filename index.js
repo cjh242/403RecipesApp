@@ -161,6 +161,9 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       }
 });
 
+app.get('/logout', checkAuthenticated, (req, res) => { 
+  res.render('logout.ejs')});
+
 app.post('/logout', (req, res) => {
     req.logout((err) => {
       if (err) {

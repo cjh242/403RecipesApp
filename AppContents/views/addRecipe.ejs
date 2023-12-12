@@ -55,12 +55,11 @@
             <li><a href="/allrecipes">All Recipes</a></li>
             <% if (isAuthenticated) { %>
             <li><a href="/myrecipes">My Recipes</a></li>
+            <li><a href="/logout">Logout</a></li>
             <% } else { %>
             <li><a href="/register">Register</a></li>
+            <li><a href="/Login">Login</a></li>
             <% } %>
-            <li><a><form action="/logout" method="POST">
-              <button type="submit">Logout</button>
-            </form></a></li>
           </ul>
         </nav><!-- .navbar -->
   
