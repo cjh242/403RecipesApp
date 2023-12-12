@@ -125,7 +125,7 @@ app.get("/allrecipes", async (req, res) => {
 app.get("/myrecipes", checkAuthenticated, async (req, res) => {
   const UserId = req.user.id;
 
-  const recipes = await Recipe.findAll({ where: { userId: UserId } });
+  const recipes = await Recipe.findAll({ where: { UserId: UserId } });
   res.render('myRecipes.ejs',  { myrecipes: recipes });
 });
 
