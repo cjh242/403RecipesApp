@@ -122,6 +122,13 @@ app.get("/myrecipes", checkAuthenticated, async (req, res) => {
   res.render('myRecipes.ejs',  { myrecipes: recipes });
 });
 
+app.get("/myrecipes1", checkAuthenticated, async (req, res) => {
+  const UserId = req.user.id;
+
+  const recipes = await Recipe.findAll({ where: { userId: UserId } });
+  res.render('myRecipes1.ejs',  { myrecipes: recipes });
+});
+
 
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
