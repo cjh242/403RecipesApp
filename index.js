@@ -260,9 +260,9 @@ app.post('/editRecipe/:id', checkAuthenticated, async (req, res) => {
           );
       
           if (numRowsUpdated > 0) {
-          res.redirect('/');
+          res.redirect('/myRecipes');
           } else {
-          res.redirect('/edit');
+          res.redirect('/');
           }
       } catch (error) {
           // Handle the error
