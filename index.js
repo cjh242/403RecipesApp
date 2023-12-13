@@ -1,6 +1,3 @@
-// if (process.env.NODE_ENV !== 'production') {
-//     require('dotenv').config()
-//   }
 
 let express = require('express');
 let app = express();
@@ -186,7 +183,7 @@ app.post('/new', checkAuthenticated, async (req, res) => {
 
     console.log('New recipe created:', newRecipe);
     
-    res.redirect('/new');
+    res.redirect('/myrecipes');
 });
 
 // // Display form for editing a recipe
