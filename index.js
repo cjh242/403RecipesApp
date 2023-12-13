@@ -1,6 +1,3 @@
-// if (process.env.NODE_ENV !== 'production') {
-//     require('dotenv').config()
-//   }
 
 let express = require('express');
 let app = express();
