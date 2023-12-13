@@ -111,22 +111,22 @@ app.set('views', path.join(baseDir, 'AppContents', 'views'))
 
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
-app.get("/", checkAuthenticated, (req, res) => { 
-    res.render('index.ejs')});
+app.get("/", (req, res) => { 
+    res.render('index.ejs', { isAuthenticated: req.isAuthenticated()})});
 
 app.get("/new", checkAuthenticated, (req, res) => { 
-    res.render('addRecipe.ejs', { userId: req.user.id })});
+    res.render('addRecipe.ejs', { isAuthenticated: req.isAuthenticated(), userId: req.user.id })});
 
 app.get("/allrecipes", async (req, res) => {
   const recipes = await Recipe.findAll();
-  res.render('allRecipes.ejs',  { myrecipes: recipes });
+  res.render('allRecipes.ejs',  { isAuthenticated: req.isAuthenticated(), myrecipes: recipes });
 });
 
 app.get("/myrecipes", checkAuthenticated, async (req, res) => {
   const UserId = req.user.id;
 
   const recipes = await Recipe.findAll({ where: { UserId: UserId } });
-  res.render('myRecipes.ejs',  { myrecipes: recipes });
+  res.render('myRecipes.ejs',  { isAuthenticated: req.isAuthenticated(), myrecipes: recipes });
 });
 
 
@@ -160,6 +160,9 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
         res.redirect('/register');
       }
 });
+
+app.get('/logout', checkAuthenticated, (req, res) => { 
+  res.render('logout.ejs')});
 
 app.post('/logout', (req, res) => {
     req.logout((err) => {
