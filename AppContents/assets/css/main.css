@@ -1298,3 +1298,7 @@ section {
 .footer .credits a {
   color: var(--color-white);
 }
+
+th, td {
+  padding: 15px;
+}
