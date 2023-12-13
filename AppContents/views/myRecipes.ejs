@@ -93,39 +93,37 @@
         </div>
 
         <div class="form mt-5">
-          <table>
-            <thead>
-              <tr>
-                  <th style="width: 20%;text-align:left">Recipe Title</th>
-                  <th style="width: 17%;text-align:left">Description</th>
-                  <th style="width: 10%;text-align:center">Category</th>
-                  <th style="width: 15%;text-align:left">Ingredients</th>
-                  <th style="width: 25%;text-align:left">Instructions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ul>
-                <% myrecipes.forEach(recipe => { %>
-                  <tr>
-                    <td style="word-wrap: normal"><%= recipe.title %></td>
-                    <td style="word-wrap: normal"><%= recipe.description %></td>
-                    <td style="text-align:center"><%= recipe.category %></td>
-                    <td style="word-wrap: normal"><%= recipe.ingredients %></td>
-                    <td style="word-wrap: normal"><%= recipe.instructions %></td>
-                    <td style="width: 25%;text-align:center">
-                      <form action="/editRecipe<%= recipe.id %>" method="GET">
-                        <input type="submit" name="Edit" value="Edit"/>
-                      </form>
-                      <form action="/deleteRecipe/<%= recipe.id %>" method="POST">
-                        <input type="submit" name="Delete" value="Delete" />
-                      </form>
-                    </td>
-                  </tr>
-                <% }); %> 
-              </ul> 
-            </tbody>
-          </table>
-          <!-- <div class="text-center"><button type="submit">Delete Recipe</button></div> -->
+            <table>
+              <thead>
+                <tr>
+                    <th style="width: 20%;text-align:left">Recipe Title</th>
+                    <th style="width: 17%;text-align:left">Description</th>
+                    <th style="width: 10%;text-align:center">Category</th>
+                    <th style="width: 15%;text-align:left">Ingredients</th>
+                    <th style="width: 25%;text-align:left">Instructions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ul>
+                  <% myrecipes.forEach(recipe => { %>
+                    <tr>
+                      <td style="word-wrap: normal"><%= recipe.title %></td>
+                      <td style="word-wrap: normal"><%= recipe.description %></td>
+                      <td style="text-align:center"><%= recipe.category %></td>
+                      <td style="word-wrap: normal"><%= recipe.ingredients %></td>
+                      <td style="word-wrap: normal"><%= recipe.instructions %></td>
+                      <td style="width: 25%;text-align:center">
+                        <button><a href="/deleterecipe/<%= recipe.id %>">Delete Recipe</a></button>
+                      </td>
+                      <td>
+                       <button><a href="/editrecipe<%= recipe.id %>">Edit Recipe</a></button>
+                      </td>
+                    </tr>
+                  <% }); %> 
+                </ul> 
+              </tbody>
+            </table>
+          </form>
         </div><!-- End Contact Form -->
         <br>
         <a href="/new" class="button-link">

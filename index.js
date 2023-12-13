@@ -201,9 +201,11 @@ app.post('/new', checkAuthenticated, async (req, res) => {
 
 // Display form for editing a recipe
 app.get('/editRecipe:id', checkAuthenticated, async (req, res) => {
+
   try {
     // Find the recipe by its primary key (ID)
     const editRecipe = await Recipe.findByPk(req.params.id);
+    const UserId = req.user.id;
 
     // Check if the recipe was found
     if (editRecipe) {
@@ -215,13 +217,15 @@ app.get('/editRecipe:id', checkAuthenticated, async (req, res) => {
       const instructions = editRecipe.instructions;
 
       // Render the form with existing recipe data for editing
-      res.render('editRecipe', {
+      res.render('editRecipe.ejs', {
         title,
         description,
         category,
         ingredients,
         instructions,
-        isAuthenticated: req.isAuthenticated()
+        isAuthenticated: req.isAuthenticated(), 
+        editRecipe: editRecipe, 
+        myuser: UserId
       });
     } else {
       // Handle case where the recipe with the specified ID is not found
@@ -234,8 +238,41 @@ app.get('/editRecipe:id', checkAuthenticated, async (req, res) => {
   }
 });
 
+app.post('/editRecipe/:id', checkAuthenticated, async (req, res) => {
+      try {
+          // Update user information in the database
+          //hashes the password before it is stored in the database
+          const [numRowsUpdated, updatedRecipe] = await Recipe.update(
+          {
+            UserId: req.user.id,
+            title: req.body.title,
+            category: req.body.category,
+            description: req.body.description,
+            ingredients: req.body.ingredients,
+            instructions: req.body.instructions,
+              
+          },
+          {
+              //finds the current user and uses where to compare it to the database only updating that user
+              where: { id: req.params.id },
+              returning: true, // Return the updated user
+          }
+          );
+      
+          if (numRowsUpdated > 0) {
+          res.redirect('/myRecipes');
+          } else {
+          res.redirect('/');
+          }
+      } catch (error) {
+          // Handle the error
+          console.error(error);
+          res.redirect('/edit');
+      }
+  }
+  );
 
-app.post('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
+app.get('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 
   const deleteRecipe = await Recipe.destroy({
     where: { id: req.params.id }
