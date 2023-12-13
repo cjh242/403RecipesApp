@@ -113,10 +113,10 @@
                       <td style="word-wrap: normal"><%= recipe.ingredients %></td>
                       <td style="word-wrap: normal"><%= recipe.instructions %></td>
                       <td style="width: 25%;text-align:center">
-                        <a href="/editrecipe<%= recipe.id %>">Edit Recipe</a>
-                        <form action="/deleteRecipe/<%= recipe.id %>" method="POST">
-                          <input type="submit" name="Delete" value="Delete" />
-                        </form>
+                        <button><a href="/deleterecipe/<%= recipe.id %>">Delete Recipe</a></button>
+                      </td>
+                      <td>
+                       <button><a href="/editrecipe<%= recipe.id %>">Edit Recipe</a></button>
                       </td>
                     </tr>
                   <% }); %> 

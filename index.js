@@ -272,7 +272,7 @@ app.post('/editRecipe/:id', checkAuthenticated, async (req, res) => {
   }
   );
 
-app.post('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
+app.get('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 
   const deleteRecipe = await Recipe.destroy({
     where: { id: req.params.id }
