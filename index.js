@@ -186,6 +186,52 @@ app.post('/new', checkAuthenticated, async (req, res) => {
     res.redirect('/new');
 });
 
+// // Display form for editing a recipe
+// app.get('/editRecipe', checkAuthenticated, async (req, res) => {
+
+//   const editRecipe = await Recipe.findByPk(req.params.id);
+  
+//   // Render the form with existing recipe data for editing
+//   res.render('editRecipe', { editRecipe, isAuthenticated: req.isAuthenticated() });
+// });
+
+
+// Display form for editing a recipe
+app.get('/editRecipe:id', checkAuthenticated, async (req, res) => {
+  try {
+    // Find the recipe by its primary key (ID)
+    const editRecipe = await Recipe.findByPk(req.params.id);
+
+    // Check if the recipe was found
+    if (editRecipe) {
+      // Access individual columns
+      const title = editRecipe.title;
+      const description = editRecipe.description;
+      const category = editRecipe.category;
+      const ingredients = editRecipe.ingredients;
+      const instructions = editRecipe.instructions;
+
+      // Render the form with existing recipe data for editing
+      res.render('editRecipe', {
+        title,
+        description,
+        category,
+        ingredients,
+        instructions,
+        isAuthenticated: req.isAuthenticated()
+      });
+    } else {
+      // Handle case where the recipe with the specified ID is not found
+      res.status(404).send('Recipe not found');
+    }
+  } catch (error) {
+    // Handle any errors that might occur during database interaction
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 app.post('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 
   const deleteRecipe = await Recipe.destroy({
