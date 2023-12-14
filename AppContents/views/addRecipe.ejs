@@ -142,8 +142,14 @@
             <h3 class="footer-heading">Navigation</h3>
             <ul class="footer-links list-unstyled">
               <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
-              <li><a href="/"><i class="bi bi-chevron-right"></i> My Recipes</a></li>
+              <li><a href="/allrecipes"><i class="bi bi-chevron-right"></i>All Recipes</a></li>
+            <% if (isAuthenticated) { %>
+              <li><a href="/myRecipes"><i class="bi bi-chevron-right"></i>My Recipes</a></li>
+              <li><a href="/logout"><i class="bi bi-chevron-right"></i>Logout</a></li>
+              <% } else { %>
+              <li><a href="/register"><i class="bi bi-chevron-right"></i>Register</a></li>
               <li><a href="/login"><i class="bi bi-chevron-right"></i> Log In</a></li>
+              <% } %>
             </ul>
           </div>
 
