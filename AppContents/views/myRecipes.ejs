@@ -49,14 +49,18 @@ Lets the user view their recipes on the website
         <h1>Poor Chefs</h1>
       </a>
 
+      <!--  ==== Navigation Bar ==== -->
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/allrecipes">All Recipes</a></li>
+
+          <!-- Ejs to check authentication to view myrecipes page, logout page -->
           <% if (isAuthenticated) { %>
           <li><a href="/myrecipes">My Recipes</a></li>
           <li><a href="/logout">Logout</a></li>
           <% } else { %>
+
           <li><a href="/register">Register</a></li>
           <li><a href="/Login">Login</a></li>
           <% } %>
@@ -68,12 +72,11 @@ Lets the user view their recipes on the website
 
         <i class="bi bi-list mobile-nav-toggle"></i>
 
-        <!-- ======= Search Form ======= -->
         <div class="search-form-wrap js-search-form-wrap">
           <form action="search-result.html" class="search-form">
             <button class="btn js-search-close"><span></span></button>
           </form>
-        </div><!-- End Search Form -->
+        </div>
 
       </div>
 
@@ -85,15 +88,18 @@ Lets the user view their recipes on the website
     <section id="contact" class="contact mb-5">
       <div class="container" data-aos="fade-up">
 
+        <!-- Title -->
         <div class="row">
           <div class="col-lg-12 text-center mb-5">
             <h1 class="page-title">My Recipes</h1>
           </div>
         </div>
 
+        <!-- Table with recipes -->
         <div class="form mt-5">
             <table>
               <thead>
+                <!-- table header -->
                 <tr style="border-bottom: 1px solid black;" >
                     <th style="width: 20%;text-align:left">Recipe Title</th>
                     <th style="width: 17%;text-align:left">Description</th>
@@ -102,6 +108,7 @@ Lets the user view their recipes on the website
                     <th style="width: 25%;text-align:left">Instructions</th>
                 </tr>
               </thead>
+              <!-- ejs to display all the recipes -->
               <tbody>
                 <ul>
                   <% myrecipes.forEach(recipe => { %>
@@ -111,9 +118,12 @@ Lets the user view their recipes on the website
                       <td style="text-align:center"><%= recipe.category %></td>
                       <td style="word-wrap: normal"><%= recipe.ingredients %></td>
                       <td style="word-wrap: normal"><%= recipe.instructions %></td>
+
+                      <!-- delete button  -->
                       <td style="width: 25%;text-align:center">
                         <button><a href="/deleterecipe/<%= recipe.id %>">Delete Recipe</a></button>
                       </td>
+                      <!-- edit button -->
                       <td>
                        <button><a href="/editrecipe<%= recipe.id %>">Edit Recipe</a></button>
                       </td>
@@ -122,9 +132,10 @@ Lets the user view their recipes on the website
                 </ul> 
               </tbody>
             </table>
-          </form>
-        </div><!-- End Contact Form -->
+        </div><!-- End Table -->
         <br>
+
+        <!-- button to add new recipe -->
         <a href="/new" class="button-link">
           <button class="button-style">Add new recipe</button>
         </a>
@@ -139,20 +150,26 @@ Lets the user view their recipes on the website
     <div class="footer-content">
       <div class="container">
 
+        <!-- title -->
         <div class="row g-5">
           <div class="col-lg-4">
             <h3 class="footer-heading">About Poor Chefs</h3>
             <p>Who are we? We're the poor chefs in the college towns around the country. We don't have the money or time to think about what to eat every day, but together, we will have that time. We're all about helping college students find a platform for easy recipes that they can make on the go or late at night. Share your favorite dorm room recipes and let others in on the yumminess. Happy cooking!</p>
           </div>
+
+          <!-- === Navigation Bar === -->
           <div class="col-6 col-lg-2">
             <h3 class="footer-heading">Navigation</h3>
             <ul class="footer-links list-unstyled">
               <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
               <li><a href="/allrecipes"><i class="bi bi-chevron-right"></i>All Recipes</a></li>
+
+              <!-- ejs to check authentication to view myrecipes and logoutpage -->
             <% if (isAuthenticated) { %>
               <li><a href="/myRecipes"><i class="bi bi-chevron-right"></i>My Recipes</a></li>
               <li><a href="/logout"><i class="bi bi-chevron-right"></i>Logout</a></li>
               <% } else { %>
+                
               <li><a href="/register"><i class="bi bi-chevron-right"></i>Register</a></li>
               <li><a href="/login"><i class="bi bi-chevron-right"></i> Log In</a></li>
               <% } %>
