@@ -1,7 +1,13 @@
+//all imports and variables 
 let express = require('express');
 
 let app = express();
-
+const port = process.env.PORT || 3000;
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
 const path = require('path');
 
 const projectRoot = path.join('403RecipesApp', '/');
