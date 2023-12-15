@@ -48,7 +48,8 @@ Lets the user edit their recipes and updates it on the website
         <a href="/" class="logo d-flex align-items-center">
           <h1>Poor Chefs</h1>
         </a>
-  
+        
+        <!-- .navbar -->
         <nav id="navbar" class="navbar">
           <ul>
             <li><a href="/">Home</a></li>
@@ -56,7 +57,7 @@ Lets the user edit their recipes and updates it on the website
             <li><a href="/myrecipes">My Recipes</a></li>
             <li><a href="/logout">Logout</a></li>
           </ul>
-        </nav><!-- .navbar -->
+        </nav>
   
         <div class="position-relative">
 
@@ -67,14 +68,17 @@ Lets the user edit their recipes and updates it on the website
             <form action="search-result.html" class="search-form">
               <button class="btn js-search-close"><span></span></button>
             </form>
-          </div><!-- End Search Form -->
+          </div>
+          <!-- End Search Form -->
   
         </div>
   
       </div>
   
-    </header><!-- End Header -->
+    </header>
+    <!-- End Header -->
 
+    <!--Here is the main content of the page-->
     <main id="main">
         <section id="contact" class="contact mb-5">
             <div class="container" data-aos="fade-up">
@@ -84,7 +88,7 @@ Lets the user edit their recipes and updates it on the website
                 <h1 class="page-title">Edit Recipe</h1>
                 </div>
             </div>
-
+            <!-- The page will first display the values of each column of the recipe being edited based on the recipe id. And the user can edit the values-->
             <div class="form mt-5">
                 <form action="/editRecipe/<%= editRecipe.id %>" method="POST" class="php-email-form">
                 <div class="row">
@@ -110,14 +114,16 @@ Lets the user edit their recipes and updates it on the website
                     <textarea rows="5" cols="30" name="instructions" class="form-control" id="instructions" placeholder="Instructions" required><%= editRecipe.instructions %></textarea>
                     </div>
                 </div>
-                <div class="text-center"><button type="submit">Update Recipe</button></div>
+                <div class="text-center"><button type="submit">Update Recipe</button></div> <!--This button will submit the form to the editRecipe route (POST)-->
                 </form>
-            </div><!-- End Contact Form -->
+            </div>
+            <!-- End Form -->
 
             </div>
         </section>
 
-        </main><!-- End #main -->
+        </main>
+        <!-- End #main -->
     
 
   <!-- ======= Footer ======= -->

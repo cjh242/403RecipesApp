@@ -49,7 +49,8 @@ Lets the user add a recipe to the myrecipes and allrecipes website
         <a href="/" class="logo d-flex align-items-center">
           <h1>Poor Chefs</h1>
         </a>
-  
+        
+        <!-- .navbar -->
         <nav id="navbar" class="navbar">
           <ul>
             <li><a href="/">Home</a></li>
@@ -62,7 +63,7 @@ Lets the user add a recipe to the myrecipes and allrecipes website
             <li><a href="/Login">Login</a></li>
             <% } %>
           </ul>
-        </nav><!-- .navbar -->
+        </nav>
   
         <div class="position-relative">
           <a class="mx-2 js-search-open"><span></span></a>
@@ -80,8 +81,10 @@ Lets the user add a recipe to the myrecipes and allrecipes website
   
       </div>
   
-    </header><!-- End Header -->
+    </header>
+    <!-- End Header -->
 
+  <!--Here is the main content of the page-->
   <main id="main">
     <section id="contact" class="contact mb-5">
       <div class="container" data-aos="fade-up">
@@ -92,6 +95,7 @@ Lets the user add a recipe to the myrecipes and allrecipes website
           </div>
         </div>
 
+        <!--The infomation that the user needs to fill out for the new recipe-->
         <div class="form mt-5">
           <form action="/new" method="POST" class="php-email-form">
             <div class="row">
@@ -118,14 +122,16 @@ Lets the user add a recipe to the myrecipes and allrecipes website
                 <textarea rows="5" cols="30" name="instructions" class="form-control" id="instructions" placeholder="Instructions" required></textarea>
               </div>
             </div>
-            <div class="text-center"><button type="submit">Add Recipe</button></div>
+            <div class="text-center"><button type="submit">Add Recipe</button></div>  <!--This button will submit the form to the new route (POST)-->
           </form>
-        </div><!-- End Contact Form -->
+        </div>
+        <!-- End Form -->
 
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
