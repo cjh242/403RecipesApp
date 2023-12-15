@@ -1,3 +1,5 @@
+//sets up passport authentication
+//very standard for passport
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('./index.js');
