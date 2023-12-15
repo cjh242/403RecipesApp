@@ -2,19 +2,28 @@
 // Section 002 
 // This is how the server talks to the client 
 
+//all imports
 let express = require('express');
 let app = express();
+//sets the port
 const port = process.env.PORT || 3000;
+//encryption
 const bcrypt = require('bcrypt');
+//used for authentication
 const passport = require('passport');
+//flash messages
 const flash = require('express-flash');
+//sessions
 const session = require('express-session');
 const methodOverride = require('method-override');
+//helps know where stuff is
 const path = require('path');
+//project root
 const projectRoot = path.join('403RecipesApp', '/');
 //const { Client } = require('pg');
 const { Sequelize, DataTypes } = require('sequelize');
 
+//initializes passport that was set up in passportconfig
 const initializePassport = require('./passport-config');
 initializePassport(
     passport,
@@ -22,6 +31,7 @@ initializePassport(
     id => User.findByPk(id)
 );
 
+//database connection
 const sequelize = new Sequelize('recipes-data', 'postgres', 'Elliot24Conway23', {
     host: 'recipes-server.cgflce8swton.us-east-1.rds.amazonaws.com',
     dialect: 'postgres',
@@ -33,11 +43,12 @@ const sequelize = new Sequelize('recipes-data', 'postgres', 'Elliot24Conway23', 
       },
   });
 
+//variables
 var cheapCooks = 'AppContents/';
 var stylesheets = '';
 const baseDir = __dirname;
-//const users = [];
 
+//user model
 const User = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
@@ -52,6 +63,7 @@ const User = sequelize.define('User', {
 
   module.exports = User;
 
+  //recipe model
   const Recipe = sequelize.define('recipe', {
     // Define recipe attributes
     title: {
@@ -95,6 +107,7 @@ const User = sequelize.define('User', {
   //   console.error('Error syncing database:', error);
   // });
 
+//using ejs and sessions
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
@@ -111,17 +124,22 @@ app.set('views', path.join(baseDir, 'AppContents', 'views'))
 
 app.use(express.static(path.join(stylesheets, 'AppContents')));
 
+//routes
+//landing page
 app.get("/", (req, res) => { 
     res.render('index.ejs', { isAuthenticated: req.isAuthenticated()})});
 
+//add recipe view route
 app.get("/new", checkAuthenticated, (req, res) => { 
     res.render('addRecipe.ejs', { isAuthenticated: req.isAuthenticated(), userId: req.user.id })});
 
+//allrecipes view route
 app.get("/allrecipes", async (req, res) => {
   const recipes = await Recipe.findAll();
   res.render('allRecipes.ejs',  { isAuthenticated: req.isAuthenticated(), myrecipes: recipes });
 });
 
+//my recipes route that only shows the recipes you have added
 app.get("/myrecipes", checkAuthenticated, async (req, res) => {
   const UserId = req.user.id;
 
@@ -130,18 +148,22 @@ app.get("/myrecipes", checkAuthenticated, async (req, res) => {
 });
 
 
+//register view route
 app.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')});
 
+//login view route
 app.get('/login', checkNotAuthenticated, (req, res) => { 
     res.render('login.ejs')});
 
+//login post
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
   }));
 
+//register post that creates a new user
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -161,9 +183,11 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       }
 });
 
+//logout page
 app.get('/logout', checkAuthenticated, (req, res) => { 
   res.render('logout.ejs')});
 
+//logout action post
 app.post('/logout', (req, res) => {
     req.logout((err) => {
       if (err) {
@@ -173,6 +197,7 @@ app.post('/logout', (req, res) => {
     });
   });
 
+//route to add new recipe
 app.post('/new', checkAuthenticated, async (req, res) => {
 
     const newRecipe = await Recipe.create({
@@ -272,6 +297,7 @@ app.post('/editRecipe/:id', checkAuthenticated, async (req, res) => {
   }
   );
 
+//delete recipe
 app.get('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 
   const deleteRecipe = await Recipe.destroy({
@@ -282,13 +308,15 @@ app.get('/deleteRecipe/:id', checkAuthenticated, async (req, res) => {
 });
 
 
+//function to see if someone is authenticated
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
     }
     res.redirect('/login');
 }
-  
+
+//function to see if someone is not authenticated 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return res.redirect('/')
@@ -296,4 +324,5 @@ function checkNotAuthenticated(req, res, next) {
     next()
 }
 
+//listen
 app.listen(port, () => console.log("The server is listening for a client."));
