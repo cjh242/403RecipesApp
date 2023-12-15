@@ -1,3 +1,7 @@
+
+<!-- Conway Hogan, Tiffany Hansen, Elliot Pi, Jaden Gatherum
+Section 002 -->
+
 <?php
   /**
   * Requires the "PHP Email Form" library

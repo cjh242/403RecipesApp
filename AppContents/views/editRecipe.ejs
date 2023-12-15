@@ -1,7 +1,7 @@
 <!-- 
 Conway Hogan, Tiffany Hansen, Elliot Pi, Jaden Gatherum
 Section 002 
-This is how the user can log in to the website to add, edit, or delete their recipes
+Lets the user edit their recipes and updates it on the website
 -->
 
 <!DOCTYPE html>
@@ -38,73 +38,87 @@ This is how the user can log in to the website to add, edit, or delete their rec
 </head>
 
 <body>
-<% if (messages.error) { %>
-    <%= messages.error %>
-    <% } %>
+  <% if (messages.error) { %>
+      <%= messages.error %>
+      <% } %>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  
+        <a href="/" class="logo d-flex align-items-center">
+          <h1>Poor Chefs</h1>
+        </a>
+  
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/allrecipes">All Recipes</a></li>
+            <li><a href="/myrecipes">My Recipes</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </nav><!-- .navbar -->
+  
+        <div class="position-relative">
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
-      <a href="/" class="logo d-flex align-items-center">
-        <h1>Poor Chefs</h1>
-      </a>
-
-      <!-- ==== Navigation Bar ==== -->
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/myrecipes">My Recipes</a></li>
-          <li><a href="/register">Register</a></li>
-        </ul>
-      </nav>
-
-      <div class="position-relative">
-        <a class="mx-2 js-search-open"><span></span></a>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-        <div class="search-form-wrap js-search-form-wrap">
-          <form action="search-result.html" class="search-form">
-            <button class="btn js-search-close"><span></span></button>
-          </form>
+          <a class="mx-2 js-search-open"><span></span></a>
+  
+          <!-- ======= Search Form ======= -->
+          <div class="search-form-wrap js-search-form-wrap">
+            <form action="search-result.html" class="search-form">
+              <button class="btn js-search-close"><span></span></button>
+            </form>
+          </div><!-- End Search Form -->
+  
         </div>
-
+  
       </div>
+  
+    </header><!-- End Header -->
 
-    </div>
+    <main id="main">
+        <section id="contact" class="contact mb-5">
+            <div class="container" data-aos="fade-up">
 
-  </header><!-- End Header -->
-
-  <!-- ==== Start Main ==== -->
-  <main id="main">
-    <section id="contact" class="contact mb-5">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-12 text-center mb-5">
-            <h1 class="page-title">Log In</h1>
-          </div>
-        </div>
-        <!-- === Log In Form -->
-        <div class="form mt-5">
-          <form action="/login" method="POST" class="php-email-form">
             <div class="row">
-              <!-- email input -->
-              <div class="form-group col-md-6">
-                <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
-              </div>
-              <!-- password input -->
-              <div class="form-group col-md-6">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-              </div>
+                <div class="col-lg-12 text-center mb-5">
+                <h1 class="page-title">Edit Recipe</h1>
+                </div>
             </div>
-            <div class="text-center"><button type="submit">Log In</button></div>
-          </form>
-        </div><!-- End Log In Form -->
 
-      </div>
-    </section>
+            <div class="form mt-5">
+                <form action="/editRecipe/<%= editRecipe.id %>" method="POST" class="php-email-form">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="<%= editRecipe.title %>" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                    <label for="category">Category: </label>
+                    <select id="category" name="category">
+                        <option value="Breakfast" <%= editRecipe.category === 'Breakfast' ? 'selected' : '' %>>Breakfast</option>
+                        <option value="Lunch" <%= editRecipe.category === 'Lunch' ? 'selected' : '' %>>Lunch</option>
+                        <option value="Dinner" <%= editRecipe.category === 'Dinner' ? 'selected' : '' %>>Dinner</option>
+                        <option value="Dessert" <%= editRecipe.category === 'Dessert' ? 'selected' : '' %>>Dessert</option>
+                    </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                    <input type="text" name="description" class="form-control" id="description" placeholder="Description" value="<%= editRecipe.description %>" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                    <input type="text" name="ingredients" class="form-control" id="ingredients" placeholder="Ingredients" value="<%= editRecipe.ingredients %>" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                    <textarea rows="5" cols="30" name="instructions" class="form-control" id="instructions" placeholder="Instructions" required><%= editRecipe.instructions %></textarea>
+                    </div>
+                </div>
+                <div class="text-center"><button type="submit">Update Recipe</button></div>
+                </form>
+            </div><!-- End Contact Form -->
 
-  </main><!-- End #main -->
+            </div>
+        </section>
+
+        </main><!-- End #main -->
+    
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -117,16 +131,16 @@ This is how the user can log in to the website to add, edit, or delete their rec
             <h3 class="footer-heading">About Poor Chefs</h3>
             <p>Who are we? We're the poor chefs in the college towns around the country. We don't have the money or time to think about what to eat every day, but together, we will have that time. We're all about helping college students find a platform for easy recipes that they can make on the go or late at night. Share your favorite dorm room recipes and let others in on the yumminess. Happy cooking!</p>
           </div>
-
-          <!-- ==== Navigation Bar -->
           <div class="col-6 col-lg-2">
             <h3 class="footer-heading">Navigation</h3>
             <ul class="footer-links list-unstyled">
               <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
-              <li><a href="/allRecipes"><i class="bi bi-chevron-right"></i>All Recipes</a></li>
-              <li><a href="/register"><i class="bi bi-chevron-right"></i>Register</a></li>
+              <li><a href="/allrecipes"><i class="bi bi-chevron-right"></i>All Recipes</a></li>
+              <li><a href="/myRecipes"><i class="bi bi-chevron-right"></i>My Recipes</a></li>
+              <li><a href="/logout"><i class="bi bi-chevron-right"></i>Logout</a></li>
             </ul>
           </div>
+
           </div>
         </div>
       </div>
@@ -148,10 +162,16 @@ This is how the user can log in to the website to add, edit, or delete their rec
               <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
               Designed by <a href="https://bootstrapmade.com/">Group 15</a>
             </div>
+
           </div>
+
           </div>
+
         </div>
+
       </div>
+
+
   </footer>
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
