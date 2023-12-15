@@ -1,3 +1,9 @@
+/* 
+Conway Hogan, Tiffany Hansen, Elliot Pi, Jaden Gatherum
+Section 002
+CSS for entires recipes website
+ */
+
 /**
 * Template Name: ZenBlog
 * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -1297,4 +1303,8 @@ section {
 
 .footer .credits a {
   color: var(--color-white);
+}
+
+th, td {
+  padding: 15px;
 }

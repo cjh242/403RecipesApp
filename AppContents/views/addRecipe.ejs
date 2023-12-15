@@ -1,0 +1,198 @@
+
+<!-- 
+Conway Hogan, Tiffany Hansen, Elliot Pi, Jaden Gatherum
+Section 002 
+Lets the user add a recipe to the myrecipes and allrecipes website
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Poor Chefs</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS Files -->
+  <link href="assets/css/variables.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  
+</head>
+
+<body>
+  <% if (messages.error) { %>
+      <%= messages.error %>
+      <% } %>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  
+        <a href="/" class="logo d-flex align-items-center">
+          <h1>Poor Chefs</h1>
+        </a>
+  
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/allrecipes">All Recipes</a></li>
+            <% if (isAuthenticated) { %>
+            <li><a href="/myrecipes">My Recipes</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/Login">Login</a></li>
+            <% } %>
+          </ul>
+        </nav><!-- .navbar -->
+  
+        <div class="position-relative">
+          <a class="mx-2 js-search-open"><span></span></a>
+  
+          <i class="bi bi-list mobile-nav-toggle"></i>
+  
+          <!-- ======= Search Form ======= -->
+          <div class="search-form-wrap js-search-form-wrap">
+            <form action="search-result.html" class="search-form">
+              <button class="btn js-search-close"><span></span></button>
+            </form>
+          </div><!-- End Search Form -->
+  
+        </div>
+  
+      </div>
+  
+    </header><!-- End Header -->
+
+  <main id="main">
+    <section id="contact" class="contact mb-5">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h1 class="page-title">Add New Recipe</h1>
+          </div>
+        </div>
+
+        <div class="form mt-5">
+          <form action="/new" method="POST" class="php-email-form">
+            <div class="row">
+              <input type="hidden" name="UserId" value="<%= userId %>">
+              <div class="form-group col-md-6">
+                <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="category">Category: </label>
+                <select id="category" name="category">
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Dinner">Dinner</option>
+                  <option value="Dessert">Dessert</option>
+              </select>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="text" name="description" class="form-control" id="description" placeholder="Description" required>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="text" name="ingredients" class="form-control" id="ingredients" placeholder="Ingredients" required>
+              </div>
+              <div class="form-group col-md-6">
+                <textarea rows="5" cols="30" name="instructions" class="form-control" id="instructions" placeholder="Instructions" required></textarea>
+              </div>
+            </div>
+            <div class="text-center"><button type="submit">Add Recipe</button></div>
+          </form>
+        </div><!-- End Contact Form -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-content">
+      <div class="container">
+
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <h3 class="footer-heading">About Poor Chefs</h3>
+            <p>Who are we? We're the poor chefs in the college towns around the country. We don't have the money or time to think about what to eat every day, but together, we will have that time. We're all about helping college students find a platform for easy recipes that they can make on the go or late at night. Share your favorite dorm room recipes and let others in on the yumminess. Happy cooking!</p>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h3 class="footer-heading">Navigation</h3>
+            <ul class="footer-links list-unstyled">
+              <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
+              <li><a href="/allrecipes"><i class="bi bi-chevron-right"></i>All Recipes</a></li>
+            <% if (isAuthenticated) { %>
+              <li><a href="/myRecipes"><i class="bi bi-chevron-right"></i>My Recipes</a></li>
+              <li><a href="/logout"><i class="bi bi-chevron-right"></i>Logout</a></li>
+              <% } else { %>
+              <li><a href="/register"><i class="bi bi-chevron-right"></i>Register</a></li>
+              <li><a href="/login"><i class="bi bi-chevron-right"></i> Log In</a></li>
+              <% } %>
+            </ul>
+          </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    <div class="footer-legal">
+      <div class="container">
+
+        <div class="row justify-content-between">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <div class="copyright">
+              © Copyright <strong><span>Poor Chefs</span></strong>. All Rights Reserved
+            </div>
+
+            <div class="credits">
+              Designed by <a href="https://bootstrapmade.com/">Group 15</a>
+            </div>
+
+          </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
