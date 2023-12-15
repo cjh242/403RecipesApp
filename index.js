@@ -1,3 +1,6 @@
+// Conway Hogan, Tiffany Hansen, Elliot Pi, Jaden Gatherum
+// Section 002 
+// This is how the server talks to the client 
 
 let express = require('express');
 let app = express();
